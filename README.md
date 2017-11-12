@@ -1,3 +1,5 @@
-# Segmentation-of-Images
+# ALGORITHMS OF IMAGE SEGMENTATION
 
-There are Watershed, MeanShift and other algorithms of image segmentation.
+There are some algorithms of image segmentation.  
+Watershed  
+MeanShift

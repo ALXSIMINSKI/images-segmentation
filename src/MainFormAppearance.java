@@ -92,16 +92,16 @@ public class MainFormAppearance {
                     } else if(item.equals("Moon")) {
                         currentImage = imgCont.getImage(1);
                         procImage = imgCont.getImage(1);
-                    } else if(item.equals("Rainbow cat")) {
+                    } else if(item.equals("Rainbow Cat")) {
                         currentImage = imgCont.getImage(2);
                         procImage = imgCont.getImage(2);
-                    } else if(item.equals("Just circle")) {
+                    } else if(item.equals("Circle")) {
                         currentImage = imgCont.getImage(3);
                         procImage = imgCont.getImage(3);
                     } else if(item.equals("Green mountains")) {
                         currentImage = imgCont.getImage(4);
                         procImage = imgCont.getImage(4);
-                    } else if(item.equals("E. Skywalker (dark version.)")) {
+                    } else if(item.equals("Anakin Skywalker")) {
                         currentImage = imgCont.getImage(5);
                         procImage = imgCont.getImage(5);
                     } else if(item.equals("House")) {
