@@ -1,10 +1,12 @@
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.opencv.core.*;
+import org.opencv.imgcodecs.Imgcodecs;
 
 public class ImagesContainer {
 
@@ -48,29 +50,31 @@ public class ImagesContainer {
             return images.get(0);
     }
 
-    Mat bufferedImage2Mat(BufferedImage image) {
+    Mat bufferedImage2Mat(BufferedImage image, int chanelNumber) {
         byte[] pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
-        Mat im = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC3);
+        Mat im = null;
+        if(chanelNumber == 3) {
+            im = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC3);
+        } else
+            if(chanelNumber == 2) {
+                im = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC2);
+            } else
+                if(chanelNumber == 1) {
+                    im = new Mat(image.getHeight(), image.getWidth(), CvType.CV_8UC1);
+                }
         im.put(0,0, pixels);
         return im;
     }
 
     BufferedImage Mat2BufferedImage(Mat imageInMat) {
-        BufferedImage out;
-        byte[] data = new byte[imageInMat.width() * imageInMat.height()
-                               * (int)imageInMat.elemSize()];
-        int type;
-        imageInMat.get(0, 0, data);
-
-        if(imageInMat.channels() == 1)
-            type = BufferedImage.TYPE_BYTE_GRAY;
-        else
-            type = BufferedImage.TYPE_3BYTE_BGR;
-
-        out = new BufferedImage(imageInMat.width(), imageInMat.height(), type);
-
-        out.getRaster().setDataElements(0, 0, imageInMat.width(),
-                                        imageInMat.height(), data);
+        BufferedImage out = null;
+        MatOfByte mob = new MatOfByte();
+        Imgcodecs.imencode(".jpg", imageInMat, mob);
+        try {
+            out = ImageIO.read(new ByteArrayInputStream(mob.toArray()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return out;
     }
 }
