@@ -1,8 +1,8 @@
 # ALGORITHMS OF IMAGE SEGMENTATION
 
 There are some algorithms of image segmentation.  
-Watershed  
-MeanShift
-FloodFill
-KMean segmentation
-Canny edge detector
+Watershed,  
+MeanShift,  
+FloodFill,  
+KMean segmentation,  
+Canny edge detector.  
