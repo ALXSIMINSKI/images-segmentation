@@ -2,41 +2,33 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.opencv.core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 
 public class ImagesContainer {
 
-    private List<BufferedImage> images;
+    private List<File> images;
+    private List<BufferedImage> bufferedImages = new ArrayList<>();
 
     ImagesContainer() {
         images = new ArrayList<>();
         try {
-            images.add(ImageIO.read(this.
-                    getClass().getResource("images/pic.jpg")));
-            images.add(ImageIO.read(this.
-                    getClass().getResource("images/pic1.jpg")));
-            images.add(ImageIO.read(this.
-                    getClass().getResource("images/pic2.jpg")));
-            images.add(ImageIO.read(this.
-                    getClass().getResource("images/pic3.jpg")));
-            images.add(ImageIO.read(this.
-                    getClass().getResource("images/pic4.jpg")));
-            images.add(ImageIO.read(this.
-                    getClass().getResource("images/pic5.jpg")));
-            images.add(ImageIO.read(this.
-                    getClass().getResource("images/pic6.jpg")));
-            images.add(ImageIO.read(this.
-                    getClass().getResource("images/pic7.jpg")));
-            images.add(ImageIO.read(this.
-                    getClass().getResource("images/pic8.jpg")));
-            images.add(ImageIO.read(this.
-                    getClass().getResource("images/pic9.jpg")));
-            images.add(ImageIO.read(this.
-                    getClass().getResource("images/pic10.jpg")));
+            images = Files.walk(Paths.get("C:\\Users\\User\\IdeaProjects\\Segmentation_of_Images\\src\\images"))
+                    .filter(Files::isRegularFile)
+                    .map(Path::toFile)
+                    .collect(Collectors.toList());
+            for(File img : images) {
+                bufferedImages.add(ImageIO.read(img));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,10 +36,10 @@ public class ImagesContainer {
     }
 
     BufferedImage getImage(int number) {
-        if(number >= 0 && number < 11)
-            return images.get(number);
+        if(number >= 0 && number < bufferedImages.size())
+            return bufferedImages.get(number);
         else
-            return images.get(0);
+            return bufferedImages.get(0);
     }
 
     Mat bufferedImage2Mat(BufferedImage image, int chanelNumber) {
