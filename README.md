@@ -5,5 +5,4 @@ Watershed,
 MeanShift,  
 FloodFill,  
 KMean segmentation,  
-Canny edge detector,   
-GrabCut.   
+Canny edge detector.   
