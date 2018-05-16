@@ -64,6 +64,14 @@ public class MainFormAppearance {
                      procImage = new GrabCut().grabCutSegmentation(currentImage);
                      createFrame(procImage);
                  }
+                 else if(item.equals("Threshold")) {
+                     procImage = new Threshold().thresholdSegmentation(currentImage);
+                     createFrame(procImage);
+                 }
+                 else if(item.equals("BradlyThreshold")) {
+                     procImage = new BradleyThreshold().bradleyThresholdBinary(currentImage);
+                     createFrame(procImage);
+                 }
             }
         });
         totalGUI.add(divideImageIntoSeg, BorderLayout.SOUTH);
@@ -79,7 +87,9 @@ public class MainFormAppearance {
                 "FloodFill",
                 "Canny Edge Detector",
                 "KMean",
-                "GrabCut"
+                "GrabCut",
+                "Threshold",
+                "BradlyThreshold"
         };
 
         JPanel comboBoxPanel = new JPanel(new GridLayout(1,2));

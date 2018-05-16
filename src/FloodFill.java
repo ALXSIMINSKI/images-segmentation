@@ -67,8 +67,8 @@ public class FloodFill {
         Random random = new Random();
         int connectivity = 4;
         int newMaskVal = 255;
-        int lowerDiff = 20;
-        int upperDiff = 20;
+        int lowerDiff = 35;
+        int upperDiff = 35;
         int b = random.nextInt(256);
         int g = random.nextInt(256);
         int r = random.nextInt(256);

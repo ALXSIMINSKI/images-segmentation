@@ -52,20 +52,20 @@ public class KMeans {
                     }
                 }
             }
-            if (mode == MODE_ITERATIVE) {
-                // update clusters 
-                for (int i = 0 ; i < clusters.length ; i++) {
-                    clusters[i].clear();
-                }
-                for (int y = 0 ; y < h ; y++) {
-                    for (int x = 0 ; x < w ; x++) {
-                        int clusterId = lut[w * y + x];
-                        // add pixels to cluster 
-                        clusters[clusterId].addPixel(
-                                image.getRGB(x, y));
-                    }
-                }
-            }
+//            if (mode == MODE_ITERATIVE) {
+//                // update clusters
+//                for (int i = 0 ; i < clusters.length ; i++) {
+//                    clusters[i].clear();
+//                }
+//                for (int y = 0 ; y < h ; y++) {
+//                    for (int x = 0 ; x < w ; x++) {
+//                        int clusterId = lut[w * y + x];
+//                        // add pixels to cluster
+//                        clusters[clusterId].addPixel(
+//                                image.getRGB(x, y));
+//                    }
+//                }
+//            }
 
         }
         // create result image 
