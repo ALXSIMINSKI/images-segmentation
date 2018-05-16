@@ -5,6 +5,6 @@ Watershed,
 MeanShift,  
 FloodFill,  
 KMean segmentation,  
-Canny edge detector
-Threshold,
-BradleyThreshold.   
+Canny edge detector, 
+Threshold, 
+BradleyThreshold.    
