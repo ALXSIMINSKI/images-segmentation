@@ -7,7 +7,7 @@ import java.awt.image.DataBufferInt;
 
 public class BradleyThreshold {
 
-    ImagesContainer imgCont = new ImagesContainer();
+    private ImagesContainer imgCont = new ImagesContainer();
 
     BradleyThreshold() {
 

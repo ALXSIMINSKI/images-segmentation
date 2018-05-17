@@ -5,7 +5,7 @@ import java.awt.image.DataBufferByte;
 
 public class GrabCut {
 
-    ImagesContainer imgCont = new ImagesContainer();
+    private ImagesContainer imgCont = new ImagesContainer();
 
     GrabCut() {
 

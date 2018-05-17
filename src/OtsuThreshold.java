@@ -1,25 +1,24 @@
-import org.opencv.core.*;
+import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
+
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 
-public class MeanShift {
-
+public class OtsuThreshold {
     private ImagesContainer imgCont = new ImagesContainer();
 
-    MeanShift() {
+    OtsuThreshold() {
 
     }
 
-    public BufferedImage meanShiftSegmentation(BufferedImage img) {
+    public BufferedImage otsuThreshold(BufferedImage img) {
         byte[] pixels = ((DataBufferByte) img.getRaster().getDataBuffer()).getData();
         Mat im = imgCont.bufferedImage2Mat(img, 3);
         Mat imFed = imgCont.bufferedImage2Mat(img, 3);
         im.put(0,0, pixels);
 
-        TermCriteria tm = new TermCriteria(TermCriteria.MAX_ITER|TermCriteria.EPS,50,0.001);
-        //Imgproc.pyrMeanShiftFiltering(im, imFed, 10.0, 30.0, 1, tm);
-        Imgproc.pyrMeanShiftFiltering(im, imFed, 10.0, 30.0); //sp - радиус окна расстояния, sr - радиус окна цвета
+        Imgproc.cvtColor(im, imFed, Imgproc.COLOR_RGB2GRAY);
+        Imgproc.threshold(imFed, imFed, 127, 255, Imgproc.THRESH_BINARY_INV + Imgproc.THRESH_OTSU);
         return imgCont.Mat2BufferedImage(imFed);
     }
 }

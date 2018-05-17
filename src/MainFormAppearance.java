@@ -8,15 +8,15 @@ import java.awt.image.BufferedImage;
 public class MainFormAppearance {
     static{ System.loadLibrary(Core.NATIVE_LIBRARY_NAME); }
 
-    JFrame frame;
-    Font myFont = new Font("Font", Font.BOLD, 80);
-    BufferedImage currentImage;
-    BufferedImage procImage;
-    JPanel imagesPanel;
-    JComboBox comboOfMethods;
-    ImagesContainer imgCont;
+    private JFrame frame;
+    private Font myFont = new Font("Font", Font.BOLD, 80);
+    private BufferedImage currentImage;
+    private BufferedImage procImage;
+    private JPanel imagesPanel;
+    private JComboBox comboOfMethods;
+    private ImagesContainer imgCont;
 
-    public void redrawImages(BufferedImage originalImg, BufferedImage processedImage) {
+    private void redrawImages(BufferedImage originalImg, BufferedImage processedImage) {
         JLabel imageLabel = new JLabel(new ImageIcon(originalImg));
         imagesPanel.removeAll();
         imagesPanel.add(imageLabel);
@@ -36,43 +36,44 @@ public class MainFormAppearance {
         JButton divideImageIntoSeg = new JButton("Do segmentation");
         divideImageIntoSeg.setFont(myFont);
         divideImageIntoSeg.setBackground(Color.ORANGE);
-        divideImageIntoSeg.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                 String item = (String) comboOfMethods.getItemAt(comboOfMethods.getSelectedIndex());
-                 if(item.equals("Watershed")) {
-                     procImage = new WaterShed().waterShedSegmentation(currentImage);
-                     createFrame(procImage);
-                 }
-                 else if(item.equals("MeanShift")) {
-                     procImage = new MeanShift().meanShiftSegmentation(currentImage);
-                     createFrame(procImage);
-                 }
-                 else if(item.equals("FloodFill")) {
-                     procImage = new FloodFill().meanShiftSegmentation(currentImage);
-                     createFrame(procImage);
-                 }
-                 else if(item.equals("Canny Edge Detector")) {
-                     procImage = new CannyEdgeDetector().cannyEdgeDetectorSegmentation(currentImage);
-                     createFrame(procImage);
-                 }
-                 else if(item.equals("KMean")) {
-                     procImage = kMean(currentImage);
-                     createFrame(procImage);
-                 }
-                 else if(item.equals("GrabCut")) {
-                     procImage = new GrabCut().grabCutSegmentation(currentImage);
-                     createFrame(procImage);
-                 }
-                 else if(item.equals("Threshold")) {
-                     procImage = new Threshold().thresholdSegmentation(currentImage);
-                     createFrame(procImage);
-                 }
-                 else if(item.equals("BradlyThreshold")) {
-                     procImage = new BradleyThreshold().bradleyThresholdBinary(currentImage);
-                     createFrame(procImage);
-                 }
-            }
+        divideImageIntoSeg.addActionListener(e -> {
+             String item = (String) comboOfMethods.getItemAt(comboOfMethods.getSelectedIndex());
+             if(item.equals("Watershed")) {
+                 procImage = new WaterShed().waterShedSegmentation(currentImage);
+                 createFrame(procImage);
+             }
+             else if(item.equals("MeanShift")) {
+                 procImage = new MeanShift().meanShiftSegmentation(currentImage);
+                 createFrame(procImage);
+             }
+             else if(item.equals("FloodFill")) {
+                 procImage = new FloodFill().meanShiftSegmentation(currentImage);
+                 createFrame(procImage);
+             }
+             else if(item.equals("Canny Edge Detector")) {
+                 procImage = new CannyEdgeDetector().cannyEdgeDetectorSegmentation(currentImage);
+                 createFrame(procImage);
+             }
+             else if(item.equals("KMean")) {
+                 procImage = kMean(currentImage);
+                 createFrame(procImage);
+             }
+             else if(item.equals("GrabCut")) {
+                 procImage = new GrabCut().grabCutSegmentation(currentImage);
+                 createFrame(procImage);
+             }
+             else if(item.equals("Threshold")) {
+                 procImage = new Threshold().thresholdSegmentation(currentImage);
+                 createFrame(procImage);
+             }
+             else if(item.equals("BradlyThreshold")) {
+                 procImage = new BradleyThreshold().bradleyThresholdBinary(currentImage);
+                 createFrame(procImage);
+             }
+             else if(item.equals("OtsuThreshold")) {
+                 procImage = new OtsuThreshold().otsuThreshold(currentImage);
+                 createFrame(procImage);
+             }
         });
         totalGUI.add(divideImageIntoSeg, BorderLayout.SOUTH);
         //------------------------
@@ -89,7 +90,8 @@ public class MainFormAppearance {
                 "KMean",
                 "GrabCut",
                 "Threshold",
-                "BradlyThreshold"
+                "BradlyThreshold",
+                "OtsuThreshold"
         };
 
         JPanel comboBoxPanel = new JPanel(new GridLayout(1,2));

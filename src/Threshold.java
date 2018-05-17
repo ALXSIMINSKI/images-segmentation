@@ -11,10 +11,10 @@ import java.awt.image.DataBufferByte;
 
 public class Threshold {
 
-    ImagesContainer imgCont = new ImagesContainer();
+    private ImagesContainer imgCont = new ImagesContainer();
     private int lowerThreshold = 127;
     private int upperThreshold = 255;
-    Font myFont = new Font("Font", Font.BOLD, 80);
+    private Font myFont = new Font("Font", Font.BOLD, 80);
 
     Threshold() {
 

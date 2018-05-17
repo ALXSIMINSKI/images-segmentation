@@ -8,10 +8,10 @@ import java.util.Random;
 
 public class FloodFill {
 
-    ImagesContainer imgCont = new ImagesContainer();
+    private ImagesContainer imgCont = new ImagesContainer();
     private int x = 100;
     private int y = 100;
-    Font myFont = new Font("Font", Font.BOLD, 80);
+    private Font myFont = new Font("Font", Font.BOLD, 80);
 
     FloodFill() {
 

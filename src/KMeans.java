@@ -3,9 +3,9 @@ import java.util.Arrays;
 
 
 public class KMeans {
-    Cluster[] clusters;
-    public static final int MODE_CONTINUOUS = 1;
-    public static final int MODE_ITERATIVE = 2;
+    private Cluster[] clusters;
+    private static final int MODE_CONTINUOUS = 1;
+    private static final int MODE_ITERATIVE = 2;
 
     public KMeans() {
 

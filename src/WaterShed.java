@@ -5,7 +5,7 @@ import java.awt.image.DataBufferByte;
 
 public class WaterShed {
 
-    ImagesContainer imgCont = new ImagesContainer();
+    private ImagesContainer imgCont = new ImagesContainer();
 
     WaterShed(){
 

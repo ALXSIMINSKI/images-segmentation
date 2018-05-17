@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public class CannyEdgeDetector {
 
-    ImagesContainer imgCont = new ImagesContainer();
+    private ImagesContainer imgCont = new ImagesContainer();
 
     CannyEdgeDetector() {
 
