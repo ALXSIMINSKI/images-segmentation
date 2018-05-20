@@ -55,7 +55,7 @@ public class MainFormAppearance {
                  procImage = new FloodFill().meanShiftSegmentation(currentImage);
                  createFrame(procImage);
              }
-             else if(item.equals("Canny Edge Detector")) {
+             else if(item.equals("CannyEdgeDetector")) {
                  procImage = new CannyEdgeDetector().cannyEdgeDetectorSegmentation(currentImage);
                  createFrame(procImage);
              }
