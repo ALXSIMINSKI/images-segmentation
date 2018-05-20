@@ -7,4 +7,5 @@ FloodFill,
 KMean segmentation,  
 Canny edge detector,  
 Threshold,  
-BradleyThreshold.    
+BradleyThreshold,    
+OtsuThreshold.
