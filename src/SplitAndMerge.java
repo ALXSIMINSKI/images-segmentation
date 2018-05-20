@@ -11,7 +11,7 @@ public class SplitAndMerge {
     private FeatureMatrix image;
 
     private double splitStandardDeviation = 5;
-    private double mergeStandardDeviation = 15;
+    private double mergeStandardDeviation = 20;
     private int minSize = 3;
 
     public void run() {
