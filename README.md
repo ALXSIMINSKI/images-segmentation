@@ -4,8 +4,9 @@ There are some algorithms of image segmentation.
 Watershed,  
 MeanShift,  
 FloodFill,  
-KMean segmentation,  
-Canny edge detector,  
+KMean,   
+CannyEdgeDetector,  
 Threshold,  
 BradleyThreshold,    
-OtsuThreshold.
+OtsuThreshold,     
+SplitAndMerge.
