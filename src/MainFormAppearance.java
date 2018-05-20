@@ -1,9 +1,14 @@
 import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 
 public class MainFormAppearance {
     static{ System.loadLibrary(Core.NATIVE_LIBRARY_NAME); }
@@ -74,6 +79,22 @@ public class MainFormAppearance {
                  procImage = new OtsuThreshold().otsuThreshold(currentImage);
                  createFrame(procImage);
              }
+             else if(item.equals("SplitAndMerge")) {
+                 ImageMatrix imageMatrix = new ImageMatrix(procImage);
+                 SplitAndMerge splitAndMergeAlgorithm = new SplitAndMerge();
+                 FeatureMatrix featureMatrix = new FeatureMatrix(imageMatrix.getWidth(), imageMatrix.getHeight(), 3);
+                 for (int i=0; i<imageMatrix.getHeight(); i++) {
+                     for (int j=0; j<imageMatrix.getWidth(); j++) {
+                         Color c = new Color(imageMatrix.getPixels()[i][j]);
+                         featureMatrix.getData()[i][j][0] = c.getRed();
+                         featureMatrix.getData()[i][j][1] = c.getGreen();
+                         featureMatrix.getData()[i][j][2] = c.getBlue();
+                     }
+                 }
+                 splitAndMergeAlgorithm.setImage(featureMatrix);
+                 splitAndMergeAlgorithm.run();
+                 createFrame(featureMatrix.getImageMatrix().getBufferedImage());
+             }
         });
         totalGUI.add(divideImageIntoSeg, BorderLayout.SOUTH);
         //------------------------
@@ -91,7 +112,8 @@ public class MainFormAppearance {
                 "GrabCut",
                 "Threshold",
                 "BradlyThreshold",
-                "OtsuThreshold"
+                "OtsuThreshold",
+                "SplitAndMerge"
         };
 
         JPanel comboBoxPanel = new JPanel(new GridLayout(1,2));
@@ -117,6 +139,7 @@ public class MainFormAppearance {
         totalGUI.add(comboBoxPanel, BorderLayout.NORTH);
         //------------------------
         imagesPanel = new JPanel(new GridLayout(1,2));
+        imagesPanel.setBackground(Color.DARK_GRAY);
         JLabel imageLabel = new JLabel(new ImageIcon(currentImage));
         imagesPanel.add(imageLabel);
         totalGUI.add(imagesPanel, BorderLayout.CENTER);
@@ -132,8 +155,7 @@ public class MainFormAppearance {
             {
                 JFrame frame = new JFrame("IMAGE");
                 frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                try
-                {
+                try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 } catch (Exception e) {
                     e.printStackTrace();
