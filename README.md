@@ -8,4 +8,5 @@ KMean segmentation,
 Canny edge detector,  
 Threshold,  
 BradleyThreshold,    
-OtsuThreshold.
+OtsuThreshold,     
+SplitAndMerge.
