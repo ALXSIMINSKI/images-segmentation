@@ -11,7 +11,7 @@ public class SplitAndMerge {
     private FeatureMatrix image;
 
     private double splitStandardDeviation = 5;
-    private double mergeStandardDeviation = 30;
+    private double mergeStandardDeviation = 15;
     private int minSize = 3;
 
     public void run() {
@@ -57,13 +57,11 @@ public class SplitAndMerge {
         }
 
         /* COSMOVISION */
-        ArrayList<ImageSegment> segments = new ArrayList<ImageSegment>();
+        ArrayList<ImageSegment> segments = new ArrayList<>();
         for (ImageZone zone : zones) {
-            if (Thread.interrupted())
-                return;
             ImageSegment currentSegment = zone.segment;
 
-            Set<ImageZone> neighbourZones = new HashSet<ImageZone>();
+            Set<ImageZone> neighbourZones = new HashSet<>();
             neighbourZones.addAll(zone.north);
             neighbourZones.addAll(zone.south);
             neighbourZones.addAll(zone.east);
@@ -80,8 +78,6 @@ public class SplitAndMerge {
         /* MERGE */
         changed = true;
         while (changed) {
-            if (Thread.interrupted())
-                return;
             changed = false;
 
             /*
@@ -158,8 +154,8 @@ public class SplitAndMerge {
      */
     class ImageSegment {
 
-        private Set<ImageSegment> neighbours = new HashSet<ImageSegment>();
-        private Set<ImageZone> zones = new HashSet<ImageZone>();
+        private Set<ImageSegment> neighbours = new HashSet<>();
+        private Set<ImageZone> zones = new HashSet<>();
         private int segmentIndex;
 
         /**
@@ -176,7 +172,7 @@ public class SplitAndMerge {
             double bestNeighbourDistance = Double.MAX_VALUE;
             ImageSegment bestNeighbour = null;
 
-            /* Busco el mejor vecino */
+            /* Поиск лучшего соседа */
             for (ImageSegment neighbour : this.neighbours) {
                 if (neighbour.size() == 0) {
                     continue;
@@ -423,8 +419,7 @@ public class SplitAndMerge {
         }
 
         /**
-         * Verifica si el segmento actual cumple el criterio de homogeneidad o
-         * no.
+         * Текущий сегмент соответствует критерию однородности ?
          */
         boolean isHomogeneus() {
             for (int i = 0; i < image.getDepth(); i++) {
