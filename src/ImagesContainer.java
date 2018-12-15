@@ -22,7 +22,7 @@ public class ImagesContainer {
     ImagesContainer() {
         images = new ArrayList<>();
         try {
-            images = Files.walk(Paths.get("C:\\Users\\User\\IdeaProjects\\Segmentation_of_Images\\src\\images"))
+            images = Files.walk(Paths.get("src\\images"))
                     .filter(Files::isRegularFile)
                     .map(Path::toFile)
                     .collect(Collectors.toList());
