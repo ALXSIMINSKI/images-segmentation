@@ -1,4 +1,4 @@
-# ALGORITHMS OF IMAGE SEGMENTATION
+# ALGORITHMS OF IMAGE SEGMENTATION (Diploma work)
 
 There are some algorithms of image segmentation.  
 Watershed,  
